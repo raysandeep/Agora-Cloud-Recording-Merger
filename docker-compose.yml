@@ -10,10 +10,11 @@ services:
     ports:
       - 80:8000
     volumes:
-      - .:/usr/app
+      - .:/usr/app/media
     env_file: ./.env
     depends_on:
       - db
+      - redis
     networks:
       - internal
       - web
@@ -34,7 +35,7 @@ services:
     image: postgres:10.4
     ports:
       - 5432:5432
-    env_file: .env
+    env_file: ./.env
     networks:
       - internal
     deploy:
