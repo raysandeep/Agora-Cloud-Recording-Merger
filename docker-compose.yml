@@ -1,0 +1,58 @@
+version: "3.7"
+
+services:
+  backend:
+    container_name: backend
+    image: raysandeep/cloud-recording
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - .:/usr/app
+    env_file: ./.env
+    depends_on:
+      - db
+    networks:
+      - internal
+      - web
+    environment:
+      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/${POSTGRES_DATABASE}"
+
+  redis:
+    container_name: redis
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - internal
+
+  db:
+    container_name: db
+    image: postgres:10.4
+    ports:
+      - 5432:5432
+    env_file: .env
+    networks:
+      - internal
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_DATABASE: "${POSTGRES_DATABASE}"
+    volumes:
+      - ./dbdata:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+
+networks:
+  web:
+    external: true
+  internal:
+    external: false
