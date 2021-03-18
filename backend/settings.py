@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import cast
 from decouple import config
 import dj_database_url
 import os
@@ -9,7 +10,10 @@ SECRET_KEY = '93%d5+_^36#3n7i*a=x3gvwi10@1#=9(of=zt#y!o=ld_+p)r*'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+else:
+    ALLOWED_HOSTS = config('ALLOWED_HOSTS',[],cast=list)
 
 INSTALLED_APPS = [
     'django.contrib.admin',

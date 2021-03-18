@@ -1,0 +1,58 @@
+{
+    "name": "Agora Recording",
+    "repository": "https://github.com/raysandeep/Agora-Cloud-Recording-Merger",
+    "addons": [
+        {
+            "plan": "heroku-postgresql:hobby-dev",
+            "options": {
+                "version": "12"
+            }
+        },
+        {
+            "plan": "heroku-redis:hobby-dev"
+        }
+    ],
+    "stack": "container",
+    "env": {
+        "AWS_ACCESS_KEY": {
+            "description": "Enter your AWS Access key. Required for fetching Cloud Recording files.",
+            "required": true
+        },
+        "AWS_SECRET_KEY": {
+            "description": "Enter your AWS Access secret. Required for fetching Cloud Recording files.",
+            "required": true
+        },
+        "AWS_BUCKET_NAME": {
+            "description": "Name of your AWS S3 Bucket. Required for fetching Cloud Recording files.",
+            "required": true
+        },
+        "AWS_OUTPUT_BUCKET_NAME": {
+            "description": "Name of your AWS S3 Output Bucket.",
+            "required": true
+        },
+        "AWS_REGION": {
+            "description": "Region of your AWS S3 Bucket. Required for Cloud Recording.",
+            "required": true
+        },
+        "AGORA_DEFAULT_MERGE_MODE": {
+            "description": "Please enter Default Merge Mode. Refer: https://docs.agora.io/en/cloud-recording/cloud_recording_merge_files?platform=RESTful",
+            "required": true,
+            "value": 0
+        },
+        "AGORA_DEFAULT_FPS": {
+            "description": "Please enter Default FPS. Refer: https://docs.agora.io/en/cloud-recording/cloud_recording_merge_files?platform=RESTful",
+            "required": true,
+            "value": 15
+        },
+        "AGORA_DEFAULT_WIDTH": {
+            "description": "Please enter Default Width. Refer: https://docs.agora.io/en/cloud-recording/cloud_recording_merge_files?platform=RESTful",
+            "required": true,
+            "value": 640
+        },
+        "AGORA_DEFAULT_HEIGHT": {
+            "description": "Please enter Default Height. Refer: https://docs.agora.io/en/cloud-recording/cloud_recording_merge_files?platform=RESTful",
+            "required": true,
+            "value": 360
+        }
+    }
+}
