@@ -1,6 +1,7 @@
 {
     "name": "Agora Recording",
     "repository": "https://github.com/raysandeep/Agora-Cloud-Recording-Merger",
+    "image":"registry.heroku.com/cloud-recording-merger/web",
     "addons": [
         {
             "plan": "heroku-postgresql:hobby-dev",
